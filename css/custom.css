@@ -1,0 +1,28 @@
+/* your styles go here */
+
+.btn-secondary
+{
+  color: #fff;
+  background-color: rgba(121, 106, 238, 0.9);
+  border-color: rgba(121, 106, 238, 0.9);
+}
+
+.btn-secondary:hover 
+{
+  color: #fff;
+  background-color: rgba(121, 106, 238, 0.5);
+  border-color: rgba(121, 106, 238, 0.9);
+}
+
+.btn-secondary.dropdown-toggle {
+  background-color: rgba(121, 106, 238, 0.9);
+  background-image: none;
+  border-color: rgba(121, 106, 238, 0.9);
+}
+
+.show>.btn-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: rgba(121, 106, 238, 0.9);
+  border-color: rgba(121, 106, 238, 0.9);
+  box-shadow: 0 0 0 0.2rem rgba(121, 106, 238, 0.9);
+}
