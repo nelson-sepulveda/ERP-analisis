@@ -33,6 +33,91 @@ $(document).ready(function () {
         $(this).find('.dropdown-menu').first().stop(true, true).fadeOut();
     });
 
+    //------------------------------------------------------//
+    //Registro Cliente
+    //------------------------------------------------------//
+
+    $('#registroProveedor').validate({
+        rules:
+        {
+            nombre_pro: {required:true},
+            nit_pro:{required:true},
+            direccion_pro: {required:true}
+        },
+        messages: {
+             nombre_pro: 'Por favor ingrese el nombre',
+             nit_pro: 'Por favor ingrese el NIT',
+             direccion_pro: 'Por favor digite una direccion'
+         },
+         submitHandler: function(form){
+             var formulario = $('#registroProveedor');
+ 
+             $.ajax({
+                 url: "controller/registro/registro_proveedor.php",
+                 method:'post',
+                 data:formulario.serialize(),
+              success : function(data)
+                  {
+
+                     if(data=='true')
+                     {
+                         alert('Registro exitoso')
+                         $('#nombre_pro').val('')
+                         $('#nit_pro').val('')
+                         $('#direccion_pro').val('')  
+                         $('#myProveedor').modal('hide')   
+                     }  
+                     else
+                     {
+                         alert('No se completo el registro')
+                     }
+                  }
+               });
+           }
+     });
+
+    //------------------------------------------------------//
+    //Registro Proveedor
+    //------------------------------------------------------//
+    $('#registroProveedor').validate({
+        rules:
+        {
+            nombre_pro: {required:true},
+            nit_pro:{required:true},
+            direccion_pro: {required:true}
+        },
+        messages: {
+             nombre_pro: 'Por favor ingrese el nombre',
+             nit_pro: 'Por favor ingrese el NIT',
+             direccion_pro: 'Por favor digite una direccion'
+         },
+         submitHandler: function(form){
+             var formulario = $('#registroProveedor');
+ 
+             $.ajax({
+                 url: "controller/registro/registro_proveedor.php",
+                 method:'post',
+                 data:formulario.serialize(),
+              success : function(data)
+                  {
+
+                     if(data=='true')
+                     {
+                         alert('Registro exitoso')
+                         $('#nombre_pro').val('')
+                         $('#nit_pro').val('')
+                         $('#direccion_pro').val('')  
+                         $('#myProveedor').show('slow')   
+                     }  
+                     else
+                     {
+                         alert('No se completo el registro')
+                     }
+                  }
+               });
+           }
+     });
+
 
     // ------------------------------------------------------- //
     // Login  form validation
@@ -44,7 +129,6 @@ $(document).ready(function () {
         },
         submitHandler: function(form){
             var formulario = $('#login-form');
-            console.log('logiiiin');
 
             $.ajax({
                 url: "controller/login/login.php",
@@ -52,16 +136,16 @@ $(document).ready(function () {
                 data:formulario.serialize(),
              success : function(data)
                  {
-                    var obj = JSON.parse(data);
 
-                    if(obj.login==true)
+                    if(data=='true')
                     {
                         document.location.href='home.php'
-                    }
-                    else if(obj.login==false)
+                    }  
+                    else
                     {
-                        alert('no login')
-                    } 
+                        $('#loginUsername').val('')
+                        $('#loginPassword').val('')
+                    }
                  }
               });
           }
@@ -86,7 +170,7 @@ $(document).ready(function () {
             data:formulario.serialize(),
          success : function(data)
              {
-                var obj = JSON.parse(data);
+                var obj = JSON.parse(data)
                 // console.log(data);
                 // Terminar la parte de los modal
                 if(obj.registro==false)

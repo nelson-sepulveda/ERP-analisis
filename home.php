@@ -1,10 +1,16 @@
+<?php 
+session_start();
+  if(!$_SESSION)
+  {
+    header('location:index.php');
+  }
+?>
 <!DOCTYPE html>
-<?php require_once('conexion/conexion_DB.php'); ?>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php echo $var; ?></title>
+    <title>Studio Princes</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -112,18 +118,18 @@
           <div class="sidebar-header d-flex align-items-center">
             <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-              <h1 class="h4">Mark Stephen</h1>
-              <p>Web Designer</p>
+              <h1 class="h4"><?php echo $_SESSION['nombre']; ?></h1>
+              <p><?php echo $_SESSION['email']; ?></p>
             </div>
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
           <ul class="list-unstyled">
-            <li class="active"> <a href="index.php"><i class="icon-home"></i>Home</a></li>
-            <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Dropdown </a>
+            <li class="active"> <a href="home.php"><i class="icon-home"></i>Home</a></li>
+            <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Menu</a>
               <ul id="dashvariants" class="collapse list-unstyled">
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
+                <li><a href="#myProveedor"  data-toggle="modal" data-target="#myProveedor">Registar Proveedor</a></li>
+                <li><a href="#myProducto" data-toggle="modal" data-target="#myProducto">Registrar Producto</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myCliente">Registrar CLiente</a></li>
                 <li><a href="#">Page</a></li>
               </ul>
             </li>
@@ -646,7 +652,11 @@
         </div>
       </div>
     </div>
-    <!-- Javascript files-->
+    <!-- modals -->
+    <?php require_once('controller/modal/registro_proveedor.php'); ?>
+    <?php require_once('controller/modal/registro_producto.php'); ?>
+    <?php require_once('controller/modal/registro_cliente.php'); ?>
+    <!-- Javascrpt files-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

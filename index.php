@@ -55,13 +55,44 @@
                       <label for="login-password" class="label-material">Contraseña</label>
                     </div><input id="login" value="login" type="submit" class="btn btn-primary"></input>
                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                  </form><a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.php" class="signup">Signup</a>
+                  </form><a href="#myModal" data-toggle="modal" data-target="#myModal"   class="forgot-pass">Olvidaste la contraseña?</a><br><small>No tienes una cuenta?</small><a href="register.php" class="signup">Registrate</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <!-- Modal recuperar contraseña -->
+  <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="exampleModalLabel" class="modal-title">Recuperar Contraseña</h4>
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <p>Olvidaste tu contraseña</p>
+          <form>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="Direccion de Email" class="form-control">
+            </div>
+            <!-- <div class="form-group">       
+              <label></label>
+              <input type="password" placeholder="Password" class="form-control">
+            </div> -->
+            <!-- <div class="form-group">       
+              <input type="submit" value="Recuperar" class="btn btn-primary">
+            </div> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+          <button type="button" class="btn btn-primary">Recuperar!</button>
+        </div>
+      </div>
+     </div> 
     </div>
     <!-- Javascript files-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
