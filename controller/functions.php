@@ -150,18 +150,133 @@ function registro_proveedor($conexion,$nombre,$nit,$direccion)
 
 /**
  * Permite registrar un producto
+ * Sus atributos son:
+ *  nombre del producto
+ * Color del producto
+ * Tela del producto
+ * ID del proveedor
+ */
+function registrar_producto($conexion,$nombre,$color,$tela,$proveedor)
+{
+  $sql_producto = "INSERT INTO PRODUCTO (nombre,ID_tipo,color,tela,proveedor) VALUES ('$nombre',1,'$color','$tela','$proveedor')";
+
+  $query_producto_insert = mysqli_query($conexion,$sql_producto);
+  if($query_producto_insert)
+  {
+    echo "true";
+  }
+}
+
+
+/**
+ * Funcion que permite registrar un cliente en la BD
+ * Parametros obligatorios : nombre, email y contrasena
  * 
  */
-function registrar_producto($conexion)
+function registro_cliente($conexion,$nombre,$documento,$telefono,$email,$contrasena)
 {
+   $sql_cliente = "INSERT INTO CLIENTE (NOMBRE,DOCUMENTO,TELEFONO,EMAIL,PASS,tipo_cliente_id) VALUES ('$nombre','$documento','$telefono','$email','$contrasena',1)";
 
+   $query_cliente = mysqli_query($conexion,$sql_cliente);
+
+   if($query_cliente)
+   {
+     echo "true";
+   }
+   else
+   {
+    $errors[]="No se registro de forma correcta el empleado" . mysqli_error($con);
+    echo "false";
+   }
 }
 
 
 
-function registro_cliente($conexion,$nombre)
+
+
+
+
+
+
+
+
+
+
+
+
+function get_proveedores($con)
 {
+  $sql_dar_proveedores = "SELECT * FROM PROVEEDOR";
+  $query_proveedor = mysqli_query($con,$sql_dar_proveedores);
+
+//   <table class="table">
+//   <thead>
+//     <tr>
+//       <th>#</th>
+//       <th>First Name</th>
+//       <th>Last Name</th>
+//       <th>Username</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr>
+//       <th scope="row">1</th>
+//       <td>Mark</td>
+//       <td>Otto</td>
+//       <td>@mdo</td>
+//     </tr>
+//     <tr>
+//       <th scope="row">2</th>
+//       <td>Jacob</td>
+//       <td>Thornton</td>
+//       <td>@fat</td>
+//     </tr>
+//     <tr>
+//       <th scope="row">3</th>
+//       <td>Larry</td>
+//       <td>the Bird</td>
+//       <td>@twitter</td>
+//     </tr>
+//   </tbody>
+// </table>
+
+
+
+  if($query_proveedor)
+  {
+     ?>
+      <table class="table">
+       <thead>
+        <tr>
+          <th>Nombre </th>
+          <th>NIT</th>
+          <th>Direccion</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+     <tbody>
+     <?php 
+        while($row=mysqli_fetch_row($query_proveedor)){
+      ?>
+      <tr>
+        <td><?php echo $row[1]; ?></td>
+        <td><?php echo $row[2]; ?></td>
+        <td><?php echo $row[3]; ?></td>
+        <td>
+           <button type="button" id="btnEditar" data-toggle="modal" data-target="#update_proveedor" class="btn btn-primary" data-id="<?php echo $row[0];?>" data-nombre="<?php echo $row[1]; ?>" data-nit="<?php echo $row[2]; ?>" data-direccion="<?php echo $row[3]; ?>">Editar</button> 
+        </td>
+        <td><button type="button" id="btnEliminar" data-toggle="modal" data-target="#update_proveedor" class="btn btn-cancel" data-id="<?php echo $row[0];?>">Eliminar</button> </td>
+      </tr>
+     <?php 
+        } // end while
+     ?>
+     </tbody>
+    </table>
+     <?php
+  }
 
 }
+
 
 ?>

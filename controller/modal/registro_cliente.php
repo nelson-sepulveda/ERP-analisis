@@ -6,35 +6,31 @@
         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body">
-        <form id="registroCliente">
+        <form id="registroCliente" method="post">
           <div class="form-group">
             <label>Nombre</label>
-            <input type="text" name="nombre_cli" placeholder="Nombre Empleado" class="form-control">
+            <input type="text" name="nombre_cli" id="nombre_cli" placeholder="Nombre Empleado" class="form-control">
           </div>
           <div class="form-group">
             <label>Documento</label>
-            <input type="text" name="documento_cli" placeholder="Documento Empleado" class="form-control">
+            <input type="text" name="documento_cli" id="documento_cli" placeholder="Documento Empleado" class="form-control">
           </div>
           <div class="form-group">
             <label>telefono</label>
-            <input type="text" name="telefono_cli" placeholder="telefono Empleado" class="form-control">
+            <input type="text" name="telefono_cli" id="telefono_cli" placeholder="telefono Empleado" class="form-control">
           </div>
           <div class="form-group">
             <label>email</label>
-            <input type="text" name="email_cli" placeholder="email Empleado" class="form-control">
+            <input type="text" name="email_cli" id="email_cli" placeholder="email Empleado" class="form-control">
           </div>
           <div class="form-group">
             <label>contraseña</label>
-            <input type="text" name="contraseña_cli" placeholder="contraseña Empleado" class="form-control">
+            <input type="text" name="contraseña_cli" id="contraseña_cli" placeholder="contraseña Empleado" class="form-control">
           </div>
           <div class="form-group">       
             <input type="submit" value="Registrar" class="btn btn-primary">
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

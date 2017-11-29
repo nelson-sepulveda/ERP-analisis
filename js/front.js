@@ -33,39 +33,81 @@ $(document).ready(function () {
         $(this).find('.dropdown-menu').first().stop(true, true).fadeOut();
     });
 
+    
+
+    //------------------------------------------------------//
+    //Registro Producto
+    //------------------------------------------------------//
+
+    $('#productoG').on('click',function(event)
+    {
+        event.preventDefault();
+
+        var nombre = $('#nombre_producto').val()
+        var color = $('#color_producto').val()
+        var tela = $('#tela_producto').val()
+        var proveedor = $('#provee').val()
+
+        var talla_s = $('#talla_s').val()
+        var talla_m = $('#talla_m').val()
+        var talla_l = $('#talla_l').val()
+        var talla_xl = $('#talla_xl').val()
+        var talla_xxl = $('#talla_xxl').val()
+        
+        if(nombre!="" && color!="" && tela!="" && proveedor!="")
+        {
+           	
+            $.ajax({
+                method: "POST",
+                url: "controller/registro/registro_producto.php",
+                data: { nombre: nombre, color: color, tela:tela, proveedor : proveedor}
+              }).done(function(data)
+               {
+                  console.log(data);
+               });
+        }
+
+    })  
+
+
     //------------------------------------------------------//
     //Registro Cliente
     //------------------------------------------------------//
 
-    $('#registroProveedor').validate({
+    $('#registroCliente').validate({
         rules:
         {
-            nombre_pro: {required:true},
-            nit_pro:{required:true},
-            direccion_pro: {required:true}
+            nombre_cli: {required:true},
+            documento_cli:{required:true},
+            telefono_cli: {required:true},
+            email_cli:{required:true},
+            contraseña_cli:{required:true}
         },
         messages: {
-             nombre_pro: 'Por favor ingrese el nombre',
-             nit_pro: 'Por favor ingrese el NIT',
-             direccion_pro: 'Por favor digite una direccion'
+             nombre_cli: 'Por favor ingrese el nombre',
+             documento_cli: 'Por favor ingrese el documento',
+             telefono_cli: 'Por favor digite una telefono',
+             email_cli: 'Por favor digite un email',
+             contraseña_cli:'Por favor digite una contraseña'
          },
          submitHandler: function(form){
-             var formulario = $('#registroProveedor');
+             var formulario = $('#registroCliente');
  
              $.ajax({
-                 url: "controller/registro/registro_proveedor.php",
+                 url: "controller/registro/registro_cliente.php",
                  method:'post',
                  data:formulario.serialize(),
               success : function(data)
                   {
-
                      if(data=='true')
                      {
                          alert('Registro exitoso')
-                         $('#nombre_pro').val('')
-                         $('#nit_pro').val('')
-                         $('#direccion_pro').val('')  
-                         $('#myProveedor').modal('hide')   
+                        $('#nombre_cli').val('')
+                        $('#documento_cli').val('')
+                        $('#telefono_cli').val('')
+                        $('#email_cli').val('')
+                        $('#contraseña_cli').val('')
+                        $('#myCliente').modal('hide')   
                      }  
                      else
                      {
@@ -281,6 +323,13 @@ $(document).ready(function () {
         }
 
         return false;
-    });    
+    });  
+    
 
+});
+
+
+$('#updateProveedor').on('show.bs.modal', function(event){
+    
+    var este=$(this);
 });
