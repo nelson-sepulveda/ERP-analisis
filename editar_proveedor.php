@@ -144,9 +144,9 @@ session_start();
             </li>
             <li><a href="#editar" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Editar</a>
               <ul id="editar" class="collapse list-unstyled">
-                <li><a href="#myProveedor"  data-toggle="modal" data-target="#myProveedor">Proveedor</a></li>
-                <li><a href="#myProducto" data-toggle="modal" data-target="#myProducto">Producto</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myCliente">Cliente</a></li>
+                <li><a href="editar_proveedor.php">Proveedor</a></li>
+                <li><a href="editar_producto.php">Producto</a></li>
+                <li><a href="editar_cliente.php" >Cliente</a></li>
                 <li><a href="#">Empleado</a></li>
               </ul>
             </li>
@@ -205,6 +205,8 @@ session_start();
     <?php require_once('controller/modal/registro_producto.php'); ?>
     <?php require_once('controller/modal/registro_cliente.php'); ?>
     <?php require_once('controller/modal/update_proveedor.php'); ?>
+    <?php require_once('controller/modal/update_cliente.php'); ?>
+    <?php require_once('controller/modal/update_producto.php'); ?>
     <!-- Javascrpt files-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
@@ -214,5 +216,6 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="js/charts-home.js"></script>
     <script src="js/front.js"></script>
-  </body>
+    <script src="js/ajax_app.js"></script>
+    </body>
 </html>

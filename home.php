@@ -130,21 +130,18 @@ session_start();
                 <li><a href="#myProveedor"  data-toggle="modal" data-target="#myProveedor">Registar Proveedor</a></li>
                 <li><a href="registro_producto.php">Registrar Producto</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#myCliente">Registrar Cliente</a></li>
-                <li><a href="#">Page</a></li>
               </ul>
             </li>
             <li><a href="#Consultar" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Consultar</a>
               <ul id="Consultar" class="collapse list-unstyled">
                 <li><a href="#" data-toggle="modal" data-target="#">Producto</a></li>
-                <li><a href="#">Page</a></li>
               </ul>
             </li>
             <li><a href="#editar" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Editar</a>
               <ul id="editar" class="collapse list-unstyled">
                 <li><a href="editar_proveedor.php" >Proveedor</a></li>
-                <li><a href="#myProducto" data-toggle="modal" data-target="#myProducto">Producto</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myCliente">Cliente</a></li>
-                <li><a href="#">Empleado</a></li>
+                <li><a href="editar_producto.php">Producto</a></li>
+                <li><a href="editar_cliente.php" >Cliente</a></li>
               </ul>
             </li>
           </ul>
@@ -174,10 +171,10 @@ session_start();
                       <h3 class="h4">Validar Cedula Cliente</h3>
                     </div>
                     <div class="card-body">
-                      <form class="form-inline">
+                      <form id="busquedaCedula" class="form-inline">
                       <div class="input-group">
-                                <input type="text" class="form-control"><span class="input-group-btn">
-                                      <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Consultar</button></span>
+                                <input type="text" id="consultaDoc" class="form-control"><span class="input-group-btn">
+                                      <button type="button" id="busquedaCC" class="btn btn-primary">Consultar</button></span>
                               </div>
                      
                        <div class="card-body text-center">
@@ -243,12 +240,7 @@ session_start();
                           <label class="col-sm-3 form-control-label">Factura Numero 1234</label>
                          
                         </div>
-                             <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Fecha</label>
-                          <div class="col-sm-9">
-                            <input id="inputHorizontalWarning" type="date" placeholder="Fecha Actual" class="form-control form-control-warning"><small class="form-text"></small>
-                          </div>
-                        </div>
+                             
                        
                     <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Producto</label>
@@ -257,7 +249,6 @@ session_start();
                               <option>Camisa</option>
                               <option>Pantalon</option>
                               <option>Vestido</option>
-                              <option>Proveedor 4</option>
                             </select>
                           </div>
                         </div>

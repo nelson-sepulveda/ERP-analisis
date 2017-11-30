@@ -328,8 +328,238 @@ $(document).ready(function () {
 
 });
 
+/**
+ * Modificar proveedor
+ */
 
-$('#updateProveedor').on('show.bs.modal', function(event){
+$('#update_proveedor_modal').on('show.bs.modal', function(event){
     
     var este=$(this);
+    var modal = $('#update_proveedor_modal');
+    var button=$(event.relatedTarget);
+
+    var id = button.data('id')
+    modal.find('#ID_provee').val(id)
+
+    var nombre = button.data('nombre')
+    modal.find('#nombre_up').val(nombre)
+
+    var nit = button.data('nit')
+    modal.find('#nit_up').val(nit)
+
+    var direccion = button.data('direccion')
+    modal.find('#direccion_up').val(direccion)
 });
+
+$('#updateProveedor').validate({
+
+    rules:
+    {
+        nombre_up: {required:true},
+        nit_up:{required:true},
+        direccion_up: {required:true}
+    },
+    messages: {
+         nombre_up: 'Por favor ingrese el nombre',
+         nit_up: 'Por favor ingrese el NIT',
+         direccion_up: 'Por favor digite una direccion'
+     },
+     submitHandler: function(form){
+         var formulario = $('#updateProveedor');
+
+         $.ajax({
+             url: "controller/editar/actualizar_proveedor.php",
+             method:'post',
+             data:formulario.serialize(),
+          success : function(data)
+              {
+
+                 if(data=='true')
+                 {
+                     alert('Actualizacion exitoso')
+                     $('#nombre_up').val('')
+                     $('#nit_up').val('')
+                     $('#direccion_up').val('')  
+                     $('#update_proveedor_modal').show('slow')  
+                 }  
+                 else
+                 {
+                     alert('No se completo la actualizacion')
+                 }
+              }
+           });
+       }
+ });
+
+
+ /**
+  * 
+  Editar producto  
+
+  */
+
+
+  $('#update_producto_modal').on('show.bs.modal', function(event){
+    
+    var este=$(this);
+    var modal = $('#update_producto_modal');
+    var button=$(event.relatedTarget);
+
+
+    var id = button.data('id')
+    modal.find('#ID_produc').val(id)
+
+    var nombre = button.data('nombre')
+    modal.find('#nombre_pro_up').val(nombre)
+
+    var color = button.data('color')
+    modal.find('#color_pro_up').val(color)
+
+    var tela = button.data('tela')
+    modal.find('#tela_pro_up').val(tela)
+});
+
+
+$('#updateProducto').validate({
+    
+    rules:
+    {
+        nombre_pro_up: {required:true},
+        color_pro_up:{required:true},
+        tela_pro_up: {required:true}
+    },
+    messages: {
+        nombre_pro_up: 'Por favor ingrese el nombre',
+        color_pro_up: 'Por favor ingrese el color',
+        tela_pro_up: 'Por favor digite la tela'
+     },
+     submitHandler: function(form){
+         var formulario = $('#updateProducto');
+
+         $.ajax({
+             url: "controller/editar/actualizar_producto.php",
+             method:'post',
+             data:formulario.serialize(),
+          success : function(data)
+              {
+
+                 if(data=='true')
+                 {
+                     alert('Actualizacion exitoso')
+                     $('#nombre_pro_up').val('')
+                     $('#color_pro_up').val('')
+                     $('#tela_pro_up').val('')  
+                     $('#update_producto_modal').show('slow')  
+                 }  
+                 else
+                 {
+                     alert('No se completo la actualizacion')
+                 }
+              }
+           });
+       }
+ });
+
+
+
+
+ /**
+  * Editar Cliente
+  */
+  $('#update_cliente_modal').on('show.bs.modal', function(event){
+    
+    var este=$(this);
+    var modal = $('#update_cliente_modal');
+    var button=$(event.relatedTarget);
+
+
+    var id = button.data('id')
+    modal.find('#id_cliente').val(id)
+
+    var nombre = button.data('nombre')
+    modal.find('#nombre_cli_up').val(nombre)
+
+    var doc = button.data('doc')
+    modal.find('#documento_cli_up').val(doc)
+
+    var tela = button.data('telefono')
+    modal.find('#telefono_cli_up').val(tela)
+
+    var email = button.data('email')
+    modal.find('#email_cli_up').val(email)
+});
+
+
+$('#updateCliente').validate({
+    
+    messages: {
+        nombre_cli_up: 'Por favor ingrese el nombre',
+        documento_cli_up: 'Por favor ingrese el documento',
+        telefono_cli_up: 'Por favor digite el telefono',
+        email_cli_up:'Por favor digite el email'
+     },
+     submitHandler: function(form){
+         var formulario = $('#updateCliente');
+
+         $.ajax({
+             url: "controller/editar/actualizar_cliente.php",
+             method:'post',
+             data:formulario.serialize(),
+          success : function(data)
+              {
+
+                 if(data=='true')
+                 {
+                     alert('Actualizacion exitoso')
+                     $('#nombre_cli_up').val('')
+                     $('#documento_cli_up').val('')
+                     $('#telefono_cli_up').val('')  
+                     $('#email_cli_up').val('')
+                     $('#update_cliente_modal').show('slow')  
+                 }  
+                 else
+                 {
+                     alert('No se completo la actualizacion')
+                 }
+              }
+           });
+       }
+ });
+
+
+
+ /**
+  * 
+    Consultar Cedula del cliente
+  */
+
+  $('#busquedaCC').on('click',function(event)
+  {
+      event.preventDefault();
+
+      var cc = $('#consultaDoc').val()
+      
+          $.ajax({
+              method: "POST",
+              url: "controller/validar.php",
+              data: { cc: cc}
+            }).done(function(data)
+             {
+                if(data=='true') 
+                {
+                    alert('el usuario se encuentra activo')
+                }
+                else
+                {
+                    alert('El usuario no se encuentra registrado')
+                    $('#myCliente').modal('show')
+                    $('#consultaDoc').val('')
+                }
+             });
+
+  })  
+
+
+
+
+  

@@ -165,6 +165,10 @@ function registrar_producto($conexion,$nombre,$color,$tela,$proveedor)
   {
     echo "true";
   }
+  else
+  {
+    echo "false";
+  }
 }
 
 
@@ -193,54 +197,71 @@ function registro_cliente($conexion,$nombre,$documento,$telefono,$email,$contras
 
 
 
+/**
+ * 
+ * 
+ * 
+ * 
+ */
+
+/**
+ * 
+ * Permite editar un producto dentro la base de datos - mirar
+ */
+
+function get_producto($con)
+{
+  $sql_dar_producto = "SELECT * FROM PRODUCTO";
+  $query_ = mysqli_query($con,$sql_dar_producto);
+
+  if($query_)
+  {
+     ?>
+      <table class="table">
+       <thead>
+        <tr>
+          <th>Codigo </th>
+          <th>Nombre</th>
+          <th>Color</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+     <tbody>
+     <?php 
+        while($row=mysqli_fetch_row($query_)){
+      ?>
+      <tr>
+        <td><?php echo $row[1]; ?></td>
+        <td><?php echo $row[2]; ?></td>
+        <td><?php echo $row[5]; ?></td>
+        <td>
+           <button type="button" id="btnEdit" data-toggle="modal" data-target="#update_producto_modal" class="btn btn-primary" data-id="<?php echo $row[0];?>" data-nombre="<?php echo $row[2]; ?>" data-color="<?php echo $row[5]; ?>" data-tela="<?php echo $row[6]; ?>">Editar</button> 
+        </td>
+        <td><button type="button" id="btnEliminar" data-toggle="modal" data-target="#eliminarProducto" class="btn btn-cancel" data-id="<?php echo $row[0];?>">Eliminar</button> </td>
+      </tr>
+     <?php 
+        } // end while
+     ?>
+     </tbody>
+    </table>
+     <?php
+  }
+
+}
 
 
 
-
-
-
-
-
-
+/**
+ * Permmite obtener todos los proveedores en una tabla para su mayor comodidad
+ * 
+ */
 
 
 function get_proveedores($con)
 {
   $sql_dar_proveedores = "SELECT * FROM PROVEEDOR";
   $query_proveedor = mysqli_query($con,$sql_dar_proveedores);
-
-//   <table class="table">
-//   <thead>
-//     <tr>
-//       <th>#</th>
-//       <th>First Name</th>
-//       <th>Last Name</th>
-//       <th>Username</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     <tr>
-//       <th scope="row">1</th>
-//       <td>Mark</td>
-//       <td>Otto</td>
-//       <td>@mdo</td>
-//     </tr>
-//     <tr>
-//       <th scope="row">2</th>
-//       <td>Jacob</td>
-//       <td>Thornton</td>
-//       <td>@fat</td>
-//     </tr>
-//     <tr>
-//       <th scope="row">3</th>
-//       <td>Larry</td>
-//       <td>the Bird</td>
-//       <td>@twitter</td>
-//     </tr>
-//   </tbody>
-// </table>
-
-
 
   if($query_proveedor)
   {
@@ -264,9 +285,9 @@ function get_proveedores($con)
         <td><?php echo $row[2]; ?></td>
         <td><?php echo $row[3]; ?></td>
         <td>
-           <button type="button" id="btnEditar" data-toggle="modal" data-target="#update_proveedor" class="btn btn-primary" data-id="<?php echo $row[0];?>" data-nombre="<?php echo $row[1]; ?>" data-nit="<?php echo $row[2]; ?>" data-direccion="<?php echo $row[3]; ?>">Editar</button> 
+           <button type="button" id="btnEditar" data-toggle="modal" data-target="#update_proveedor_modal" class="btn btn-primary" data-id="<?php echo $row[0];?>" data-nombre="<?php echo $row[1]; ?>" data-nit="<?php echo $row[2]; ?>" data-direccion="<?php echo $row[3]; ?>">Editar</button> 
         </td>
-        <td><button type="button" id="btnEliminar" data-toggle="modal" data-target="#update_proveedor" class="btn btn-cancel" data-id="<?php echo $row[0];?>">Eliminar</button> </td>
+        <td><button type="button" id="btnEliminar" data-toggle="modal" data-target="#eliminarProveedor" class="btn btn-cancel" data-id="<?php echo $row[0];?>">Eliminar</button> </td>
       </tr>
      <?php 
         } // end while
@@ -277,6 +298,114 @@ function get_proveedores($con)
   }
 
 }
+
+
+/**
+ * Metodo que permite mostrar todos los clientes en la app
+ * 
+ */
+
+function get_clientes($con)
+{
+  $sql_dar_clientes = "SELECT * FROM cliente";
+  $query_cliente = mysqli_query($con,$sql_dar_clientes);
+
+  if($query_cliente)
+  {
+     ?>
+      <table class="table">
+       <thead>
+        <tr>
+          <th>Nombre </th>
+          <th>email</th>
+          <th>Telefono</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+     <tbody>
+     <?php 
+        while($row=mysqli_fetch_row($query_cliente)){
+      ?>
+      <tr>
+        <td><?php echo $row[1]; ?></td>
+        <td><?php echo $row[4]; ?></td>
+        <td><?php echo $row[3]; ?></td>
+        <td>
+           <button type="button" id="btnEdi" data-toggle="modal" data-target="#update_cliente_modal" class="btn btn-primary" data-id="<?php echo $row[0];?>" data-doc="<?php echo $row[2]; ?>" data-nombre="<?php echo $row[1]; ?>" data-telefono="<?php echo $row[3]; ?>" data-email="<?php echo $row[4]; ?>">Editar</button> 
+        </td>
+        <td><button type="button" id="btnEliminar" data-toggle="modal" data-target="#eliminarCliente" class="btn btn-cancel" data-id="<?php echo $row[0];?>">Eliminar</button> </td>
+      </tr>
+     <?php 
+        } // end while
+     ?>
+     </tbody>
+    </table>
+     <?php
+  }
+
+}
+
+/**
+ * Actualizar el proveedor
+ * Permite actualizar un proveedor de la base de datos con los datos respectivos
+ */
+function update_proveedor($con,$id,$nombre,$nit,$direccion)
+{
+    $sql_update_proveedor = "UPDATE PROVEEDOR SET nombre='$nombre',NIT='$nit',direccion='$direccion' WHERE ID='$id'";
+    $query_update = mysqli_query($con,$sql_update_proveedor);
+
+    if($query_update)
+    {
+      echo "true";
+    }
+    else{
+      echo "false";
+    }
+
+}
+
+
+/**
+ * Permite actualizar un producto dentro de la base de datos
+ * 
+ */
+
+ function update_producto($con,$nombre,$color,$tela,$id)
+ {
+  $sql_update_producto = "UPDATE PRODUCTO SET nombre='$nombre',color='$color',tela='$tela' WHERE ID='$id'";
+  $query_update = mysqli_query($con,$sql_update_producto);
+
+  if($query_update)
+  {
+    echo "true";
+  }
+  else{
+    echo "false";
+  }
+ }
+
+
+/**
+ * Permte actualizar el registro de un cliente
+ * 
+ */
+function update_cliente($con,$id_clie,$nombre_,$doc,$tele,$email)
+{
+  $sql_update_cliente = "UPDATE CLIENTE SET nombre='$nombre_',documento='$doc',telefono='$tele',email='$email' WHERE ID='$id_clie'";
+  $query_update = mysqli_query($con,$sql_update_cliente);
+
+  if($query_update)
+  {
+    echo "true";
+  }
+  else{
+    echo "false";
+  }
+}
+
+
+
 
 
 ?>
